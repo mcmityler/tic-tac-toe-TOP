@@ -41,7 +41,7 @@ const gameBoard = (()=>{
     */
     let _freeTileSpaces = 9;
 
-    const _symbols = ["X","O"]; //if you are first you get X if you are second you get O
+    
     function resetTiles(){
         for(let i = 0; i < _boardTiles.length; i++){
             _boardTiles[i] = "";
@@ -51,7 +51,7 @@ const gameBoard = (()=>{
     function setTile(m_tileNum){
         //if not filled in space then fill with current players symbol
         if(_boardTiles[m_tileNum] === ""){
-            _boardTiles[m_tileNum] = _symbols[(gameManger.checkTurn()? 1 : 0)] //either returns a false or true
+            _boardTiles[m_tileNum] = gameManger.checkTurn()? player1.getSymbol() : player2.getSymbol();//either returns a false or true
             gameManger.changeTurns();
             _freeTileSpaces -- ; // one less free tile space
             if(_freeTileSpaces < 5){
@@ -90,25 +90,29 @@ const gameManger = (()=>{
     function changeTurns(){
         //Swap whos turn it is
         isPlayer1Turn = !isPlayer1Turn;
+        console.log(`It is ${isPlayer1Turn === true ? "Player 1": "Player 2"}'s turn`);
     }
 
     function checkTurn(){
         //check whos turn it currently is
-        console.log(`Is is ${isPlayer1Turn ? "Player 1": "Player 2"}'s turn`);
         return isPlayer1Turn;
     }
 
     function playRound(){
         //Randomly select whos first 
         const randomInt = Math.floor(Math.random() * 2);
+        player1.setSymbol(randomInt === 0 ? "X": "O");
+        player2.setSymbol(randomInt === 0 ? "O": "X");
+        isPlayer1Turn = (randomInt === 0); //if 0 player one goes first
         if(randomInt === 0){
             //player 1 goes first
+
         }
         else{
             //player 2 goes first
 
         }
-        console.log(randomInt);
+        console.log(`it is ${isPlayer1Turn ? "Player 1" : "player 2"}'s turn to go first`);
         //let first player select a square and fill with their symbol
 
         //let next player select a square
