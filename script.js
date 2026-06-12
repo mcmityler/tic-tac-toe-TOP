@@ -2,14 +2,22 @@ function createPlayer(name, emoji, symbol){
     //create a player object here
     let myScore = 0;
     let mySymbol = symbol;
+    let myName = name;
+    let myEmoji = emoji
+    function setName(m_name){
+        myName = m_name;
+    }
     function getName(){
-        return name;
+        return myName;
+    }
+    function setEmoji(m_emoji){
+        myEmoji = m_emoji;
     }
     function getEmoji(){
-        return emoji;
+        return myEmoji;
     }
-    function setSymbol(){
-        symbol = mySymbol
+    function setSymbol(m_symbol){
+        m_symbol = mySymbol
     }
     function getSymbol(){
         return mySymbol
@@ -31,7 +39,7 @@ const gameBoard = (()=>{
         [3,4,5]
         [6,7,8]
     */
-   let _freeTileSpaces = 9;
+    let _freeTileSpaces = 9;
 
     const _symbols = ["X","O"]; //if you are first you get X if you are second you get O
     function resetTiles(){
@@ -91,8 +99,16 @@ const gameManger = (()=>{
     }
 
     function playRound(){
-        //Randomly select whos first
+        //Randomly select whos first 
+        const randomInt = Math.floor(Math.random() * 2);
+        if(randomInt === 0){
+            //player 1 goes first
+        }
+        else{
+            //player 2 goes first
 
+        }
+        console.log(randomInt);
         //let first player select a square and fill with their symbol
 
         //let next player select a square
