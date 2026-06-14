@@ -63,7 +63,10 @@ const gameBoard = (()=>{
         }
         //if not filled in space then fill with current players symbol
         if(_boardTiles[m_tileX][m_tileY] === ""){
-            _boardTiles[m_tileX][m_tileY] = gameManager.checkTurn()? player1.getSymbol() : player2.getSymbol();//either returns a false or true
+            const m_symbol = gameManager.checkTurn()? player1.getSymbol() : player2.getSymbol();
+            _boardTiles[m_tileX][m_tileY] = m_symbol;
+            gameDisplay.updateTile(m_tileX, m_tileY, m_symbol)
+            console.log(`clicked [${m_tileX}, ${m_tileY}]`)
             gameManager.changeTurns();
             _freeTileSpaces -- ; // one less free tile space
             if(_freeTileSpaces < 5){
@@ -88,22 +91,23 @@ const gameBoard = (()=>{
         let m_winner = 0; // 0 - no one won ; 1 - player 1 ; 2 - player 2 
         let m_winnerSymbol = "";
         //[0,0] top left tile
-        if((_boardTiles[0][0] == _boardTiles[0][1] && _boardTiles[0][0] == _boardTiles[0][2]) //top side line
-        || (_boardTiles[0][0] == _boardTiles[1][0] && _boardTiles[0][0] == _boardTiles[2][0]) //left side line
+        if((_boardTiles[0][0] === _boardTiles[0][1] && _boardTiles[0][0] === _boardTiles[0][2]) //top side line
+        || (_boardTiles[0][0] === _boardTiles[1][0] && _boardTiles[0][0] === _boardTiles[2][0]) //left side line
         ){
             m_winnerSymbol = _boardTiles[0][0];
         }
         //[1,1] middle tile
-        else if((_boardTiles[1][1] == _boardTiles[0][0] && _boardTiles[1][1] == _boardTiles[2][2]) //top left to bottom right
-        || (_boardTiles[1][1] == _boardTiles[0][2] && _boardTiles[1][1] == _boardTiles[2][0]) //top right to bottom left
-        || (_boardTiles[1][1] == _boardTiles[1][0] && _boardTiles[1][1] == _boardTiles[1][2]) //middle left to middle right
-        || (_boardTiles[1][1] == _boardTiles[0][1] && _boardTiles[1][1] == _boardTiles[2][1])) //middle top to middle bottom
+        if((_boardTiles[1][1] === _boardTiles[0][0] && _boardTiles[1][1] === _boardTiles[2][2]) //top left to bottom right
+        || (_boardTiles[1][1] === _boardTiles[0][2] && _boardTiles[1][1] === _boardTiles[2][0]) //top right to bottom left
+        || (_boardTiles[1][1] === _boardTiles[1][0] && _boardTiles[1][1] === _boardTiles[1][2]) //middle left to middle right
+        || (_boardTiles[1][1] === _boardTiles[0][1] && _boardTiles[1][1] === _boardTiles[2][1])) //middle top to middle bottom
         {
             m_winnerSymbol = _boardTiles[1][1];
+            console.log("winner")
         }
         //[2,2] bottom right tile
-        else if((_boardTiles[2][2] == _boardTiles[1][2] && _boardTiles[2][2] == _boardTiles[0][2]) //right side line
-        ||(_boardTiles[2][2] == _boardTiles[2][1] && _boardTiles[2][2] == _boardTiles[2][0]) //bottom side line
+        if((_boardTiles[2][2] === _boardTiles[1][2] && _boardTiles[2][2] === _boardTiles[0][2]) //right side line
+        ||(_boardTiles[2][2] === _boardTiles[2][1] && _boardTiles[2][2] === _boardTiles[2][0]) //bottom side line
         ){
             m_winnerSymbol = _boardTiles[2][2];
         }
@@ -171,6 +175,29 @@ const gameManager = (()=>{
     }
     return {changeTurns, checkTurn, startRound, setWinner, getWinner};
 
+})();
+
+const gameDisplay = (() => {
+    const myBoardDiv = document.getElementById("gameboard");
+    let myTileButtons = [[],[],[]]; //array of tile buttons to recall later
+    function resetBoard(){
+        myTileButtons = [[],[],[]]; //clear board back to empty
+        for (let i = 0; i < gameBoard.getBoard().length; i++) {
+            for (let j = 0; j < gameBoard.getBoard()[i].length; j++) {
+                const m_newButton = document.createElement("button");
+                m_newButton.addEventListener("click", ()=>{gameBoard.setTile(i,j)});
+                myTileButtons[i][j] = m_newButton;
+                myBoardDiv.append(myTileButtons[i][j]);
+            }
+        }
+    }
+    function updateTile(arrX, arrY, symbol){
+        myTileButtons[arrX][arrY].textContent = symbol;
+    }
+
+    resetBoard();
+
+    return {resetBoard, updateTile};
 })();
 
 const player1 = createPlayer("tloko", "happy", "X");
