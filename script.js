@@ -57,17 +57,21 @@ const gameBoard = (()=>{
         _freeTileSpaces = 9;
     }
     function setTile(m_tileX, m_tileY){
-        if(gameManger.getWinner() > 0){
+        if(gameManager.getWinner() > 0){
             console.log("Game is already over");
             return;
         }
         //if not filled in space then fill with current players symbol
         if(_boardTiles[m_tileX][m_tileY] === ""){
-            _boardTiles[m_tileX][m_tileY] = gameManger.checkTurn()? player1.getSymbol() : player2.getSymbol();//either returns a false or true
-            gameManger.changeTurns();
+            _boardTiles[m_tileX][m_tileY] = gameManager.checkTurn()? player1.getSymbol() : player2.getSymbol();//either returns a false or true
+            gameManager.changeTurns();
             _freeTileSpaces -- ; // one less free tile space
             if(_freeTileSpaces < 5){
-                checkBoardWin(); // check if there is a winner
+                if(checkBoardWin() === false){
+                    if(_freeTileSpaces === 0){
+                        gameManager.setWinner(3); //tie game 
+                    }
+                } // check if there is a winner
             }
         }
         else{
@@ -83,13 +87,13 @@ const gameBoard = (()=>{
         console.log("Check board winner");
         let m_winner = 0; // 0 - no one won ; 1 - player 1 ; 2 - player 2 
         let m_winnerSymbol = "";
-        //0,0
+        //[0,0] top left tile
         if((_boardTiles[0][0] == _boardTiles[0][1] && _boardTiles[0][0] == _boardTiles[0][2]) //top side line
         || (_boardTiles[0][0] == _boardTiles[1][0] && _boardTiles[0][0] == _boardTiles[2][0]) //left side line
         ){
             m_winnerSymbol = _boardTiles[0][0];
         }
-        //1,1
+        //[1,1] middle tile
         else if((_boardTiles[1][1] == _boardTiles[0][0] && _boardTiles[1][1] == _boardTiles[2][2]) //top left to bottom right
         || (_boardTiles[1][1] == _boardTiles[0][2] && _boardTiles[1][1] == _boardTiles[2][0]) //top right to bottom left
         || (_boardTiles[1][1] == _boardTiles[1][0] && _boardTiles[1][1] == _boardTiles[1][2]) //middle left to middle right
@@ -97,33 +101,34 @@ const gameBoard = (()=>{
         {
             m_winnerSymbol = _boardTiles[1][1];
         }
-        //2,2
+        //[2,2] bottom right tile
         else if((_boardTiles[2][2] == _boardTiles[1][2] && _boardTiles[2][2] == _boardTiles[0][2]) //right side line
-            ||(_boardTiles[2][2] == _boardTiles[2][1] && _boardTiles[2][2] == _boardTiles[2][0]) //bottom side line
+        ||(_boardTiles[2][2] == _boardTiles[2][1] && _boardTiles[2][2] == _boardTiles[2][0]) //bottom side line
         ){
             m_winnerSymbol = _boardTiles[2][2];
         }
 
 
         if(m_winnerSymbol != ""){
-            gameManger.setWinner(m_winnerSymbol === player1.getSymbol() ? 1 : 2);
+            gameManager.setWinner(m_winnerSymbol === player1.getSymbol() ? 1 : 2);
+            return true;
         }
         else{
             console.log("no winner yet")
+            return false;
         }
-
 
     }
     resetTiles(); //initialize tiles to empty strings
     return {setTile, getBoard, resetTiles};
 })();
 
-const gameManger = (()=>{
+const gameManager = (()=>{
     //create a game manager that deals with game logic
     let isPlayer1Turn = false; // keeps track of whos turn it is
 
     //keep track of game winner / if game is over
-    let gameWinner = 0; // 0 = no winner ; 1 = player 1 ; 2 = player 2
+    let gameWinner = 0; // 0 = no winner ; 1 = player 1 ; 2 = player 2 ; 3 = tie game
     function changeTurns(){
         //Swap whos turn it is
         isPlayer1Turn = !isPlayer1Turn;
@@ -157,6 +162,8 @@ const gameManger = (()=>{
         gameWinner = _winner;
         if(gameWinner === 1 || gameWinner === 2){
             console.log(`${gameWinner === 1 ? player1.getName() : player2.getName()} won the game`);
+        }else if(gameWinner === 3){
+            console.log("Tie Game");
         }
     }
     function getWinner(){
