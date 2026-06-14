@@ -68,13 +68,14 @@ const gameBoard = (()=>{
             gameDisplay.updateTile(m_tileX, m_tileY, m_symbol)
             console.log(`clicked [${m_tileX}, ${m_tileY}]`)
             gameManager.changeTurns();
+            gameDisplay.updateTurnText();
             _freeTileSpaces -- ; // one less free tile space
             if(_freeTileSpaces < 5){
                 if(checkBoardWin() === false){
                     if(_freeTileSpaces === 0){
                         gameManager.setWinner(3); //tie game 
                     }
-                } // check if there is a winner
+                }
             }
         }
         else{
@@ -91,25 +92,29 @@ const gameBoard = (()=>{
         let m_winner = 0; // 0 - no one won ; 1 - player 1 ; 2 - player 2 
         let m_winnerSymbol = "";
         //[0,0] top left tile
-        if((_boardTiles[0][0] === _boardTiles[0][1] && _boardTiles[0][0] === _boardTiles[0][2]) //top side line
+        if(((_boardTiles[0][0] === _boardTiles[0][1] && _boardTiles[0][0] === _boardTiles[0][2]) //top side line
         || (_boardTiles[0][0] === _boardTiles[1][0] && _boardTiles[0][0] === _boardTiles[2][0]) //left side line
-        ){
+        ) && _boardTiles[0][0] != ""){
             m_winnerSymbol = _boardTiles[0][0];
+            console.log("winner top")
+
         }
         //[1,1] middle tile
-        if((_boardTiles[1][1] === _boardTiles[0][0] && _boardTiles[1][1] === _boardTiles[2][2]) //top left to bottom right
+        else if(((_boardTiles[1][1] === _boardTiles[0][0] && _boardTiles[1][1] === _boardTiles[2][2]) //top left to bottom right
         || (_boardTiles[1][1] === _boardTiles[0][2] && _boardTiles[1][1] === _boardTiles[2][0]) //top right to bottom left
         || (_boardTiles[1][1] === _boardTiles[1][0] && _boardTiles[1][1] === _boardTiles[1][2]) //middle left to middle right
         || (_boardTiles[1][1] === _boardTiles[0][1] && _boardTiles[1][1] === _boardTiles[2][1])) //middle top to middle bottom
-        {
+         && _boardTiles[1][1] != ""){
             m_winnerSymbol = _boardTiles[1][1];
-            console.log("winner")
+            console.log("winner middle")
         }
         //[2,2] bottom right tile
-        if((_boardTiles[2][2] === _boardTiles[1][2] && _boardTiles[2][2] === _boardTiles[0][2]) //right side line
+        else if(((_boardTiles[2][2] === _boardTiles[1][2] && _boardTiles[2][2] === _boardTiles[0][2]) //right side line
         ||(_boardTiles[2][2] === _boardTiles[2][1] && _boardTiles[2][2] === _boardTiles[2][0]) //bottom side line
-        ){
+        ) && _boardTiles[2][2] != ""){
             m_winnerSymbol = _boardTiles[2][2];
+            console.log("winner bot")
+
         }
 
 
@@ -150,6 +155,7 @@ const gameManager = (()=>{
         player1.setSymbol(randomInt === 0 ? "X": "O");
         player2.setSymbol(randomInt === 0 ? "O": "X");
         isPlayer1Turn = (randomInt === 0); //if 0 player one goes first
+        gameDisplay.updateTurnText();
         console.log(`it is ${isPlayer1Turn ? "Player 1" : "player 2"}'s turn to go first`);
         //let first player select a square and fill with their symbol
 
@@ -164,22 +170,19 @@ const gameManager = (()=>{
     }
     function setWinner(_winner){
         gameWinner = _winner;
-        if(gameWinner === 1 || gameWinner === 2){
-            console.log(`${gameWinner === 1 ? player1.getName() : player2.getName()} won the game`);
-        }else if(gameWinner === 3){
-            console.log("Tie Game");
-        }
+        gameDisplay.updateTurnText();
     }
     function getWinner(){
         return gameWinner;
     }
     return {changeTurns, checkTurn, startRound, setWinner, getWinner};
-
 })();
 
 const gameDisplay = (() => {
     const myBoardDiv = document.getElementById("gameboard");
     let myTileButtons = [[],[],[]]; //array of tile buttons to recall later
+    const myTurnText = document.querySelector(".turn-display");
+
     function resetBoard(){
         myTileButtons = [[],[],[]]; //clear board back to empty
         for (let i = 0; i < gameBoard.getBoard().length; i++) {
@@ -194,11 +197,20 @@ const gameDisplay = (() => {
     function updateTile(arrX, arrY, symbol){
         myTileButtons[arrX][arrY].textContent = symbol;
     }
+    function updateTurnText(){
+        if(gameManager.getWinner() > 0){
+            myTurnText.textContent = gameManager.getWinner() === 1 ? player1.getName() + " won" : gameManager.getWinner() === 2 ? player2.getName() + " won": "Tie Game";
+        }
+        else{
+            myTurnText.textContent = `It is ${gameManager.checkTurn() === true ? player1.getName() : player2.getName()}'s turn`
+        }
+    }
 
     resetBoard();
 
-    return {resetBoard, updateTile};
+    return {resetBoard, updateTile, updateTurnText};
 })();
 
 const player1 = createPlayer("tloko", "happy", "X");
 const player2 = createPlayer("p2", "mad", "O");
+gameManager.startRound();
