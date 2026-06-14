@@ -120,6 +120,13 @@ const gameBoard = (()=>{
 
         if(m_winnerSymbol != ""){
             gameManager.setWinner(m_winnerSymbol === player1.getSymbol() ? 1 : 2);
+            if(m_winnerSymbol === player1.getSymbol()){
+                player1.addScore();
+            }
+            else{
+                player2.addScore();
+            }
+            gameDisplay.updateScoreText();
             return true;
         }
         else{
@@ -175,15 +182,23 @@ const gameManager = (()=>{
     function getWinner(){
         return gameWinner;
     }
-    return {changeTurns, checkTurn, startRound, setWinner, getWinner};
+    function resetGame(){
+        gameBoard.resetTiles();
+        gameDisplay.resetBoard();
+        setWinner(0);
+        startRound();
+    }
+    return {changeTurns, checkTurn, startRound, setWinner, getWinner, resetGame};
 })();
 
 const gameDisplay = (() => {
     const myBoardDiv = document.getElementById("gameboard");
     let myTileButtons = [[],[],[]]; //array of tile buttons to recall later
     const myTurnText = document.querySelector(".turn-display");
+    const myScoreText = document.querySelector(".score-counter")
 
     function resetBoard(){
+        myBoardDiv.textContent = "";
         myTileButtons = [[],[],[]]; //clear board back to empty
         for (let i = 0; i < gameBoard.getBoard().length; i++) {
             for (let j = 0; j < gameBoard.getBoard()[i].length; j++) {
@@ -205,12 +220,19 @@ const gameDisplay = (() => {
             myTurnText.textContent = `It is ${gameManager.checkTurn() === true ? player1.getName() : player2.getName()}'s turn`
         }
     }
+    function updateScoreText(){
+        myScoreText.textContent = `${player1.getName()}: ${player1.getScore()} pts --- ${player2.getScore()} pts : ${player2.getName()}`;
+    }
 
     resetBoard();
 
-    return {resetBoard, updateTile, updateTurnText};
+    return {resetBoard, updateTile, updateTurnText, updateScoreText};
 })();
 
 const player1 = createPlayer("tloko", "happy", "X");
 const player2 = createPlayer("p2", "mad", "O");
 gameManager.startRound();
+gameDisplay.updateScoreText();
+
+const myRestartButton = document.querySelector(".restart-button");
+myRestartButton.addEventListener("click", gameManager.resetGame);
