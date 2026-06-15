@@ -7,6 +7,10 @@
     --green: #6FBEB2;
     --light-green: #A5E9DD;
     --yellow: #FDF4AF;
+
+    --grey: #7a7a7a;
+    --light-colour: #ebebeb;
+
 }
 body{
     font-family: "Fjalla One", sans-serif;
@@ -50,43 +54,6 @@ main{
 
 .starting-dialog{
     margin-top: 200px;
-}
-/* EMOJI PICKER */
-.player-emoji-picker label{
-    display: inline-block;
-    cursor: pointer;
-    background-color: var(--dark-green);
-    border-radius: 100%;
-    width: 50px;
-    height: 50px;
-    color: black;
-}
-.player-emoji-picker label i{
-    font-size: 1.8rem;
-    display: grid;
-    place-items: center;
-    place-content: center;
-    width: 100%;
-    height: 100%;
-    transition: 0.1s ease-in;
-}
-.player-emoji-picker .rating-radio{
-    display: none;
-}
-/* when sibling checked  */
-.player-emoji-picker input[type='radio']:checked + label{
-    color: yellow;
-}
-/* when hovered */
-.player-emoji-picker label:hover i
-{
-    color: lightgray;
-}
-
-/* When clicked */
-.player-emoji-picker label:active i{
-    color: gray; 
-
 }
 
 
@@ -147,4 +114,72 @@ main{
     position: absolute;
     top: 20px;
     right: 20px;
+}
+
+
+/* EMOJI PICKER */
+.player-emoji-picker label{
+    
+    display: inline-block;
+    cursor: pointer;
+    background-color: grey;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    color: black;
+
+
+}
+.player-emoji-picker label i{
+    font-size: 1.8rem;
+    display: grid;
+    place-items: center;
+    place-content: center;
+    width: 100%;
+    height: 100%;
+    transition: 0.1s ease-in;
+}
+.player-emoji-picker .rating-radio{
+    display: none;
+}
+.player-emoji-picker input[type='radio'] + label
+{
+    --_background: var(--background, grey);
+    --_icon: var(--icon, white);
+}
+/* when sibling checked  */
+.player-emoji-picker input[type='radio']:checked + label{
+    color: var(--_icon);
+    background-color: var(--_background);
+}
+/* when hovered */
+.player-emoji-picker label:hover i
+{
+    color: lightgray;
+}
+
+/* When clicked */
+.player-emoji-picker label:active i{
+    color: white; 
+}
+
+#p1-e1 + label, #p2-e1 + label{
+     --icon: #E5E238;
+    --background: #383BE5;
+}
+#p1-e2 + label, #p2-e2 + label{
+     --icon: #1F26FF;
+    --background: #FFF81F;
+}
+#p1-e3 + label, #p2-e3 + label{
+     --icon: #5994C5;
+    --background: #C58A59;
+}
+#p1-e4 + label, #p2-e4 + label{
+     --icon: #1DAF88;
+    --background: #AF1D43;
+}
+#p1-e5 + label, #p2-e5 + label{
+     --icon: #9c868a;
+    --background: #445552;
 }
