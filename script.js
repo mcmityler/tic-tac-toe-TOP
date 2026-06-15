@@ -195,7 +195,11 @@ const gameDisplay = (() => {
     const myBoardDiv = document.getElementById("gameboard");
     let myTileButtons = [[],[],[]]; //array of tile buttons to recall later
     const myTurnText = document.querySelector(".turn-display");
-    const myScoreText = document.querySelector(".score-counter")
+    const myScoreText = document.querySelector(".score-counter");
+    const myStartButton = document.querySelector(".start-game-button");
+    const myStartDialog = document.querySelector(".starting-dialog");
+
+    myStartDialog.addEventListener("submit", startGameInput);
 
     function resetBoard(){
         myBoardDiv.textContent = "";
@@ -227,16 +231,32 @@ const gameDisplay = (() => {
     function updateScoreText(){
         myScoreText.textContent = `${player1.getName()}: ${player1.getScore()} pts --- ${player2.getScore()} pts : ${player2.getName()}`;
     }
+    function startGameInput(event){
+        // 1. Prevent the default browser page reload
+        event.preventDefault(); 
+        
+        // 2. Instantiate FormData by passing the form element
+        const formData = new FormData(event.target); 
+
+        const m_p1Name = formData.get('player1-name') === "" ? "Player 1" :  formData.get('player1-name')
+        const m_p1Emoji = formData.get('p1-emoji-input') === "" ? "happy" :  formData.get('p1-emoji-input')
+        const m_p2Name = formData.get('player2-name') === "" ? "Player 2" :  formData.get('player2-name')
+        const m_p2Emoji = formData.get('p2-emoji-input') === "" ? "happy" :  formData.get('p2-emoji-input')
+        player1 = createPlayer(m_p1Name, formData.get('p1-emoji-input'), "X");
+        player2 = createPlayer(m_p2Name, formData.get('p2-emoji-input'), "O");
+
+        gameManager.startRound();
+        gameDisplay.updateScoreText();
+        myStartDialog.close();
+    }
 
     resetBoard();
 
     return {resetBoard, updateTile, updateTurnText, updateScoreText};
 })();
 
-const player1 = createPlayer("tloko", "happy", "X");
-const player2 = createPlayer("p2", "mad", "O");
-gameManager.startRound();
-gameDisplay.updateScoreText();
+let player1 = "";
+let player2 = "";
 
 const myRestartButton = document.querySelector(".restart-button");
 myRestartButton.addEventListener("click", gameManager.resetGame);

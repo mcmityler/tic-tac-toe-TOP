@@ -39,3 +39,35 @@ main{
     font-size: 2rem;
     transition: all 0.3s ease; 
 }
+
+.starting-dialog{
+    margin-top: 200px;
+}
+/* EMOJI PICKER */
+.player-emoji-picker label{
+    display: inline-block;
+    cursor: pointer;
+    color: black;
+}
+.player-emoji-picker label i{
+    font-size: 2rem;
+    transition: 0.1s ease-in;
+}
+.player-emoji-picker .rating-radio{
+    display: none;
+}
+/* when sibling checked  */
+.player-emoji-picker input[type='radio']:checked + label{
+    color: yellow;
+}
+/* when hovered */
+.player-emoji-picker label:hover i
+{
+    color: lightgray;
+}
+
+/* When clicked */
+.player-emoji-picker label:active i{
+    color: gray; 
+
+}
