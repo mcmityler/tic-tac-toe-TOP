@@ -189,3 +189,37 @@ main{
     --icon: #9c868a;
     --background: #445552;
 }
+
+
+/* APPLE LIKE INPUT */
+.input-container{
+    width: 200px;
+    position: relative;
+}
+.input-container input{
+    width: 100%;
+    padding: 15px 10px 5px 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+    font-size: 1rem;
+    outline: none;
+
+}
+.input-container label{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    padding: 10px;
+    color: grey;
+    pointer-events: none;
+    transition: all 0.4s ease;
+
+}
+/* the second one targets if the input has something different than the placeholder of "" this
+    is done so that when there is an input it moves up and works for inputs that aren't required */
+.input-container input:focus ~ label,
+.input-container input:not(:placeholder-shown) ~ label{
+    transform: translateY(-33px);
+    font-size: 0.8em;
+}

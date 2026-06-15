@@ -45,8 +45,11 @@
     <dialog class="starting-dialog" open > 
             <h1>Tic-Tac-Toe</h1>
             <form id="start-form">
-                <label for="player1-name">Player 1 name: </label>
-                <input type="text" name="player1-name" id="player1-name" maxlength="15">
+                <div class="input-container">
+                    <input type="text" name="player1-name" id="player1-name" maxlength="15" placeholder="">
+                    <label for="player1-name">Player 1 name: </label>
+
+                </div>
                 <div class="player-emoji-picker">
                         <input type="radio" name="p1-emoji-input" id="p1-e1" 
                         class="rating-radio star-initial" value="fa-face-smile" checked>
@@ -73,8 +76,10 @@
                         
                         <label for="p1-e5"><i class="fa-solid fa-skull-crossbones"></i></label>
                     </div>
-                <label for="player1-name">Player 2 name: </label>
-                <input type="text" name="player2-name" id="player2-name" maxlength="15">
+                <div class="input-container">
+                    <input type="text" name="player2-name" id="player2-name" maxlength="15" placeholder="">
+                    <label for="player1-name">Player 2 name: </label>
+                </div>
                 <div class="player-emoji-picker">
                         <input type="radio" name="p2-emoji-input" id="p2-e1" 
                         class="rating-radio star-initial" value="fa-face-smile" checked>
