@@ -71,6 +71,7 @@ main{
     place-items: center;
     justify-self: flex-end;
     align-self: center;
+    border: 3px solid black;
     background-color: var(--_background);
 }
 .p1-stats, .p2-stats{
@@ -86,7 +87,7 @@ main{
     align-self: center;
 }
 .p1-bg i, .p2-bg i{
-    font-size: 3rem;
+    font-size: 2.7rem;
     color: var(--_icon)
     
 }
