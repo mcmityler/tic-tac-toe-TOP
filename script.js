@@ -216,7 +216,7 @@ const gameManager = (()=>{
         setWinner(0);
         startRound();
     }
-    return {changeTurns, checkTurn, startRound, setWinner, getWinner, resetGame};
+    return {changeTurns, checkTurn, startRound, setWinner, getWinner, resetGame };
 })();
 
 const gameDisplay = (() => {
@@ -234,8 +234,10 @@ const gameDisplay = (() => {
     const myP1Emoji = document.querySelector(".p1-pfp");
     const myP2Emoji = document.querySelector(".p2-pfp");
     const myRestartButton = document.querySelector(".restart-button");
+    const myResetAllButton = document.querySelector(".reset-all-button");
 
     
+    myResetAllButton.addEventListener("click", resetAll);
     myRestartButton.addEventListener("click", gameManager.resetGame);
     myStartDialog.addEventListener("submit", startGameInput);
 
@@ -309,6 +311,10 @@ const gameDisplay = (() => {
         myTileButtons[x3][y3].classList.add("highlight-winner");
 
         console.log("Highlighted");
+    }
+    function resetAll(){
+        openStartDialog();
+        gameManager.resetGame();
     }
     openStartDialog();
     resetBoard();

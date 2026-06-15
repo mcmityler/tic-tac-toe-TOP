@@ -55,7 +55,7 @@ main{
     border-radius: 10px;
 }
 .size-up{
-    font-size: 2rem;
+    font-size: 4rem;
     transition: all 0.3s ease; 
     background-color: var(--grey);
 }
@@ -73,6 +73,10 @@ main{
 }
 #gameboard:has(.highlight-winner) button:not(.highlight-winner){
     background-color: black;
+    cursor:not-allowed;
+}
+#gameboard:has(.highlight-winner) button:not(.highlight-winner):hover{
+    transform: scale(1);
 }
 
 
