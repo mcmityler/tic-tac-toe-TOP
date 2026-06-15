@@ -20,6 +20,7 @@
                     <i class="p1-pfp fa-solid fa-face-smile"></i>
                 </div>
                 <p class="p1-name">Player 1</p>
+                <p class="p1-symbol">X's</p>
                 <p class="p1-score">0</p>
             </div>
             <div class="p2-stats">
@@ -27,11 +28,13 @@
                     <i class="p2-pfp fa-solid fa-face-smile"></i>
                 </div>
                 <p class="p2-name">Player 2</p>
+                <p class="p2-symbol">O's</p>
                 <p class="p2-score">0</p>
             </div>
+            <p class="turn-display">Players Turn</p>
+
         </div>
-        <p class="score-counter"></p>
-        <p class="turn-display"></p>
+        <!-- <p class="score-counter"></p> -->
         <button class="restart-button">Restart Game?</button>
     </header>
     <main>
@@ -39,7 +42,7 @@
         
     </main>
     <!-- ADD OPEN BELOW -->
-    <dialog class="starting-dialog" > 
+    <dialog class="starting-dialog" open > 
             <h1>Tic-Tac-Toe</h1>
             <form id="start-form">
                 <label for="player1-name">Player 1 name: </label>

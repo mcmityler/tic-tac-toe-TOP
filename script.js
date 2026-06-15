@@ -159,8 +159,6 @@ const gameManager = (()=>{
     function startRound(){
         //Randomly select whos first 
         const randomInt = Math.floor(Math.random() * 2);
-        player1.setSymbol(randomInt === 0 ? "X": "O");
-        player2.setSymbol(randomInt === 0 ? "O": "X");
         isPlayer1Turn = (randomInt === 0); //if 0 player one goes first
         gameDisplay.updateTurnText();
         console.log(`it is ${isPlayer1Turn ? "Player 1" : "player 2"}'s turn to go first`);
@@ -195,9 +193,13 @@ const gameDisplay = (() => {
     const myBoardDiv = document.getElementById("gameboard");
     let myTileButtons = [[],[],[]]; //array of tile buttons to recall later
     const myTurnText = document.querySelector(".turn-display");
-    const myScoreText = document.querySelector(".score-counter");
     const myStartButton = document.querySelector(".start-game-button");
     const myStartDialog = document.querySelector(".starting-dialog");
+
+    const myP1Score = document.querySelector(".p1-score");
+    const myP2Score = document.querySelector(".p2-score");
+    const myP1Name = document.querySelector(".p1-name");
+    const myP2Name = document.querySelector(".p2-name");
 
     myStartDialog.addEventListener("submit", startGameInput);
 
@@ -229,7 +231,10 @@ const gameDisplay = (() => {
         }
     }
     function updateScoreText(){
-        myScoreText.textContent = `${player1.getName()}: ${player1.getScore()} pts --- ${player2.getScore()} pts : ${player2.getName()}`;
+        myP1Name.textContent = player1.getName();
+        myP2Name.textContent = player2.getName();
+        myP1Score.textContent = player1.getScore();
+        myP2Score.textContent = player2.getScore();
     }
     function startGameInput(event){
         // 1. Prevent the default browser page reload
