@@ -1,6 +1,41 @@
+*{
+    outline: 1px solid red;
+}
+:root{
+    --dark-green: #34908B;
+    --green: #6FBEB2;
+    --light-green: #A5E9DD;
+    --yellow: #FDF4AF;
+}
+body{
+    display: grid;
+    grid-template-rows: 200px 1fr;
+    height: 100vh;
+    background-color: var(--green);
+}
+header{
+
+}
+main{
+    height: 100%;
+
+}
 #gameboard{
     display: grid;
-    grid-template-columns: 100px 100px 100px;
-    grid-template-rows: 100px 100px 100px;
-    gap: 5px;
+    grid-template-columns: 150px 150px 150px;
+    grid-template-rows: 150px 150px 150px;
+    gap: 7px;
+    padding: 100px;
+    place-content: center;
+}
+#gameboard button{
+    display: grid;
+    place-items: center;
+}
+.not-filled{
+    font-size: 0rem;
+}
+.size-up{
+    font-size: 2rem;
+    transition: all 0.3s ease; 
 }
