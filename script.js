@@ -114,7 +114,7 @@ const gameBoard = (()=>{
         ) && _boardTiles[2][2] != ""){
             m_winnerSymbol = _boardTiles[2][2];
             console.log("winner bot")
-
+            // gameDisplay.highlightWinner(m_winnerSymbol);
         }
 
 
@@ -203,7 +203,10 @@ const gameDisplay = (() => {
     const myP2Name = document.querySelector(".p2-name");
     const myP1Emoji = document.querySelector(".p1-pfp");
     const myP2Emoji = document.querySelector(".p2-pfp");
+    const myRestartButton = document.querySelector(".restart-button");
 
+    
+    myRestartButton.addEventListener("click", gameManager.resetGame);
     myStartDialog.addEventListener("submit", startGameInput);
 
     function resetBoard(){
@@ -230,7 +233,8 @@ const gameDisplay = (() => {
             myTurnText.textContent = gameManager.getWinner() === 1 ? player1.getName() + " won" : gameManager.getWinner() === 2 ? player2.getName() + " won": "Tie Game";
         }
         else{
-            myTurnText.textContent = `It is ${gameManager.checkTurn() === true ? player1.getName() : player2.getName()}'s turn`
+            myTurnText.textContent = `It is ${gameManager.checkTurn() === true ? player1.getName() : player2.getName()}'s turn 
+        (${gameManager.checkTurn() === true ? player1.getSymbol() : player2.getSymbol()}'s) `
         }
     }
     function updateEmoticon(){
@@ -274,6 +278,3 @@ const gameDisplay = (() => {
 
 let player1 = "";
 let player2 = "";
-
-const myRestartButton = document.querySelector(".restart-button");
-myRestartButton.addEventListener("click", gameManager.resetGame);

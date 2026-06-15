@@ -14,3 +14,5 @@ Wizard hat: https://fontawesome.com/icons/classic/solid/hat-wizard
 Hippo: https://fontawesome.com/icons/classic/solid/hippo
 Crow: https://fontawesome.com/icons/classic/solid/crow
 Skull: https://fontawesome.com/icons/classic/solid/skull-crossbones 
+
+restart game: https://fontawesome.com/icons/classic/solid/arrows-rotate 
