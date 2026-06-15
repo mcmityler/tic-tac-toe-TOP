@@ -195,6 +195,7 @@ const gameDisplay = (() => {
     const myTurnText = document.querySelector(".turn-display");
     const myStartButton = document.querySelector(".start-game-button");
     const myStartDialog = document.querySelector(".starting-dialog");
+    const myStartForm = document.querySelector("#start-form");
 
     const myP1Score = document.querySelector(".p1-score");
     const myP2Score = document.querySelector(".p2-score");
@@ -262,6 +263,7 @@ const gameDisplay = (() => {
         gameManager.startRound();
         updateScoreText();
         updateEmoticon();
+        myStartForm.reset();
         myStartDialog.close();
     }
 
