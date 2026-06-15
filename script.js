@@ -91,30 +91,60 @@ const gameBoard = (()=>{
         console.log("Check board winner");
         let m_winner = 0; // 0 - no one won ; 1 - player 1 ; 2 - player 2 
         let m_winnerSymbol = "";
-        //[0,0] top left tile
-        if(((_boardTiles[0][0] === _boardTiles[0][1] && _boardTiles[0][0] === _boardTiles[0][2]) //top side line
-        || (_boardTiles[0][0] === _boardTiles[1][0] && _boardTiles[0][0] === _boardTiles[2][0]) //left side line
-        ) && _boardTiles[0][0] != ""){
-            m_winnerSymbol = _boardTiles[0][0];
-            console.log("winner top")
 
-        }
+        //[0,0] top left tile
+        if(_boardTiles[0][0] === _boardTiles[0][1]
+            && _boardTiles[0][0] === _boardTiles[0][2] && _boardTiles[0][0] != ""){
+            //top side line
+            m_winnerSymbol = _boardTiles[0][0];
+            gameDisplay.highlightWiningLines(0,0,0,1,0,2);
+            
+        } 
+        else if(_boardTiles[0][0] === _boardTiles[1][0]
+            && _boardTiles[0][0] === _boardTiles[2][0] && _boardTiles[0][0] != ""){
+            //left side line
+            m_winnerSymbol = _boardTiles[0][0];
+            gameDisplay.highlightWiningLines(0,0,1,0,2,0);
+        } 
+
         //[1,1] middle tile
-        else if(((_boardTiles[1][1] === _boardTiles[0][0] && _boardTiles[1][1] === _boardTiles[2][2]) //top left to bottom right
-        || (_boardTiles[1][1] === _boardTiles[0][2] && _boardTiles[1][1] === _boardTiles[2][0]) //top right to bottom left
-        || (_boardTiles[1][1] === _boardTiles[1][0] && _boardTiles[1][1] === _boardTiles[1][2]) //middle left to middle right
-        || (_boardTiles[1][1] === _boardTiles[0][1] && _boardTiles[1][1] === _boardTiles[2][1])) //middle top to middle bottom
-         && _boardTiles[1][1] != ""){
+        else if(_boardTiles[1][1] === _boardTiles[0][0]
+            && _boardTiles[1][1] === _boardTiles[2][2] && _boardTiles[1][1] != ""){
+            //top left to bottom right diagonal
             m_winnerSymbol = _boardTiles[1][1];
-            console.log("winner middle")
+            gameDisplay.highlightWiningLines(0,0,1,1,2,2);
         }
+        else if(_boardTiles[1][1] === _boardTiles[0][2]
+            && _boardTiles[1][1] === _boardTiles[2][0] && _boardTiles[1][1] != ""){
+            //top right to bottom left diagonal
+            m_winnerSymbol = _boardTiles[1][1];
+            gameDisplay.highlightWiningLines(1,1,0,2,2,0);
+        }
+        else if(_boardTiles[1][1] === _boardTiles[1][0]
+            && _boardTiles[1][1] === _boardTiles[1][2] && _boardTiles[1][1] != ""){
+            //middle left to middle right line
+            m_winnerSymbol = _boardTiles[1][1];
+            gameDisplay.highlightWiningLines(1,1,1,0,1,2);
+        }
+        else if(_boardTiles[1][1] === _boardTiles[0][1]
+            && _boardTiles[1][1] === _boardTiles[2][1] && _boardTiles[1][1] != ""){
+            //middle top to middle bottom line
+            m_winnerSymbol = _boardTiles[1][1];
+            gameDisplay.highlightWiningLines(1,1,0,1,2,1);
+        }
+
         //[2,2] bottom right tile
-        else if(((_boardTiles[2][2] === _boardTiles[1][2] && _boardTiles[2][2] === _boardTiles[0][2]) //right side line
-        ||(_boardTiles[2][2] === _boardTiles[2][1] && _boardTiles[2][2] === _boardTiles[2][0]) //bottom side line
-        ) && _boardTiles[2][2] != ""){
+        else if(_boardTiles[2][2] === _boardTiles[1][2] 
+            && _boardTiles[2][2] === _boardTiles[0][2] && _boardTiles[2][2] != ""){
+            //right side line
             m_winnerSymbol = _boardTiles[2][2];
-            console.log("winner bot")
-            // gameDisplay.highlightWinner(m_winnerSymbol);
+            gameDisplay.highlightWiningLines(2,2,1,2,0,2);
+        }
+        else if(_boardTiles[2][2] === _boardTiles[2][1]
+            && _boardTiles[2][2] === _boardTiles[2][0] && _boardTiles[2][2] != ""){
+            //bottom side line
+            m_winnerSymbol = _boardTiles[2][2];
+            gameDisplay.highlightWiningLines(2,2,2,1,2,0);
         }
 
 
@@ -270,10 +300,20 @@ const gameDisplay = (() => {
         myStartForm.reset();
         myStartDialog.close();
     }
+    function openStartDialog(){
+        myStartDialog.showModal();
+    }
+    function highlightWiningLines(x1,y1,x2,y2,x3,y3){
+        myTileButtons[x1][y1].classList.add("highlight-winner");
+        myTileButtons[x2][y2].classList.add("highlight-winner");
+        myTileButtons[x3][y3].classList.add("highlight-winner");
 
+        console.log("Highlighted");
+    }
+    openStartDialog();
     resetBoard();
 
-    return {resetBoard, updateTile, updateTurnText, updateScoreText};
+    return {resetBoard, updateTile, updateTurnText, updateScoreText, highlightWiningLines};
 })();
 
 let player1 = "";
