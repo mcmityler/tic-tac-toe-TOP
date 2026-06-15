@@ -50,13 +50,32 @@ main{
 .not-filled{
     font-size: 0rem;
 }
+
+#gameboard button{
+    border-radius: 10px;
+}
 .size-up{
     font-size: 2rem;
     transition: all 0.3s ease; 
+    background-color: var(--grey);
 }
 .highlight-winner{
-    background-color: red;
+    background-color: var(--dark-green);
 }
+.not-filled{
+    background-color: var(--yellow);
+    transition: all 0.4s ease;
+}
+.not-filled:hover{
+    background-color: var(--light-colour);
+    transform: scale(1.03);
+
+}
+#gameboard:has(.highlight-winner) button:not(.highlight-winner){
+    background-color: black;
+}
+
+
 
 
 .scoreboard{
