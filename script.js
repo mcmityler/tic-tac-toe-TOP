@@ -200,6 +200,8 @@ const gameDisplay = (() => {
     const myP2Score = document.querySelector(".p2-score");
     const myP1Name = document.querySelector(".p1-name");
     const myP2Name = document.querySelector(".p2-name");
+    const myP1Emoji = document.querySelector(".p1-pfp");
+    const myP2Emoji = document.querySelector(".p2-pfp");
 
     myStartDialog.addEventListener("submit", startGameInput);
 
@@ -230,6 +232,13 @@ const gameDisplay = (() => {
             myTurnText.textContent = `It is ${gameManager.checkTurn() === true ? player1.getName() : player2.getName()}'s turn`
         }
     }
+    function updateEmoticon(){
+        //empty lists
+        myP1Emoji.classList = ""; 
+        myP2Emoji.classList = ""; 
+        myP1Emoji.classList = `fa-solid ${player1.getEmoji()}`; 
+        myP2Emoji.classList = `fa-solid ${player2.getEmoji()}`; 
+    }
     function updateScoreText(){
         myP1Name.textContent = player1.getName();
         myP2Name.textContent = player2.getName();
@@ -244,14 +253,15 @@ const gameDisplay = (() => {
         const formData = new FormData(event.target); 
 
         const m_p1Name = formData.get('player1-name') === "" ? "Player 1" :  formData.get('player1-name')
-        const m_p1Emoji = formData.get('p1-emoji-input') === "" ? "happy" :  formData.get('p1-emoji-input')
+        const m_p1Emoji = formData.get('p1-emoji-input') === "" ? "fa-face-smile" :  formData.get('p1-emoji-input')
         const m_p2Name = formData.get('player2-name') === "" ? "Player 2" :  formData.get('player2-name')
-        const m_p2Emoji = formData.get('p2-emoji-input') === "" ? "happy" :  formData.get('p2-emoji-input')
+        const m_p2Emoji = formData.get('p2-emoji-input') === "" ? "fa-face-smile" :  formData.get('p2-emoji-input')
         player1 = createPlayer(m_p1Name, formData.get('p1-emoji-input'), "X");
         player2 = createPlayer(m_p2Name, formData.get('p2-emoji-input'), "O");
 
         gameManager.startRound();
-        gameDisplay.updateScoreText();
+        updateScoreText();
+        updateEmoticon();
         myStartDialog.close();
     }
 
