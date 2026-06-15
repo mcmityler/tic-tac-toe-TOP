@@ -35,11 +35,12 @@
 
         </div>
         <!-- <p class="score-counter"></p> -->
-        <button class="restart-button" aria-label="Restart Game Button"><i class="fa-solid fa-arrows-rotate"></i></button>
+        <button class="restart-button pointer-cursor" aria-label="Restart Game Button">
+            <i class="fa-solid fa-arrows-rotate"></i></button>
     </header>
     <main>
         <div id="gameboard"></div>
-        
+        <button class="reset-all-button pointer-cursor">Reset Everything</button>
     </main>
     <!-- ADD OPEN BELOW -->
     <dialog class="starting-dialog" open > 
@@ -50,7 +51,7 @@
                     <label for="player1-name">Player 1 name: </label>
 
                 </div>
-                <div class="player-emoji-picker">
+                <div class="player-emoji-picker  pointer-cursor">
                     <input type="radio" name="p1-emoji-input" id="p1-e1" 
                     class="rating-radio star-initial" value="fa-face-smile" checked>
             
@@ -80,7 +81,7 @@
                     <input type="text" name="player2-name" id="player2-name" maxlength="15" placeholder="">
                     <label for="player1-name">Player 2 name: </label>
                 </div>
-                <div class="player-emoji-picker">
+                <div class="player-emoji-picker  pointer-cursor">
                     <input type="radio" name="p2-emoji-input" id="p2-e1" 
                     class="rating-radio star-initial" value="fa-face-smile" checked>
 
@@ -106,7 +107,7 @@
                     
                     <label for="p2-e5"><i class="fa-solid fa-skull-crossbones"></i></i></label>
                 </div>
-                <button class="start-game-button">Start Game</button>
+                <button class="start-game-button pointer-cursor">Start Game</button>
             </form>
         </dialog>
     <script src="./script.js"></script>

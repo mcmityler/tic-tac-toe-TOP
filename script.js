@@ -215,7 +215,7 @@ const gameDisplay = (() => {
         for (let i = 0; i < gameBoard.getBoard().length; i++) {
             for (let j = 0; j < gameBoard.getBoard()[i].length; j++) {
                 const m_newButton = document.createElement("button");
-                m_newButton.classList.add("not-filled");
+                m_newButton.classList.add("not-filled", "pointer-cursor");
                 m_newButton.addEventListener("click", ()=>{gameBoard.setTile(i,j)});
                 myTileButtons[i][j] = m_newButton;
                 myBoardDiv.append(myTileButtons[i][j]);
@@ -223,7 +223,7 @@ const gameDisplay = (() => {
         }
     }
     function updateTile(arrX, arrY, symbol){
-        myTileButtons[arrX][arrY].classList.remove("not-filled");
+        myTileButtons[arrX][arrY].classList.remove("not-filled", "pointer-cursor");
 
         myTileButtons[arrX][arrY].classList.add("size-up");
         myTileButtons[arrX][arrY].textContent = symbol;

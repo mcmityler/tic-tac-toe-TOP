@@ -12,6 +12,9 @@
     --light-colour: #ebebeb;
 
 }
+.pointer-cursor{
+    cursor: pointer;
+}
 body{
     font-family: "Fjalla One", sans-serif;
     font-weight: 400;
@@ -111,7 +114,7 @@ main{
 .restart-button{
     position: absolute;
     top: 230px;
-    right: 48%;
+    right: calc(50% - 25px);
     width: 50px;
     height: 50px;
     border-radius: 100%;
@@ -121,7 +124,7 @@ main{
     transition: all 0.4s ease;
 }
 .restart-button:hover{
-    background-color: var(--light-green);
+    background-color: var(--dark-green);
     box-shadow: 2px 2px 10px var(--grey);
     transform: translateY(-5px) rotate(50deg);
 }
