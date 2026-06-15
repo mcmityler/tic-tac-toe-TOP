@@ -31,6 +31,10 @@ main{
     gap: 7px;
     padding: 100px;
     place-content: center;
+    width: 657px;
+    place-self: center;
+    background-color: var(--light-green);
+    box-shadow: inset 5px -5px 15px gray;
 }
 #gameboard button{
     display: grid;
