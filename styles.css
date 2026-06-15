@@ -29,7 +29,8 @@ header{
 }
 main{
     height: 100%;
-
+    display: grid;
+    grid-template-rows: 1fr 60px;
 }
 #gameboard{
     display: grid;
@@ -359,4 +360,24 @@ dialog:open::backdrop {
     var(--light-green)
   );
   opacity: 0.75;
+}
+
+
+.reset-all-button{
+    place-self: center;
+    background-color: var(--yellow);
+    border:none;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px var(--grey);
+    transition: all 0.3s ease;
+}
+.reset-all-button:hover{
+    transform: translateY(-5px);
+    background-color: var(--dark-green);
+    box-shadow: 5px 5px 15px var(--grey);
+}
+.reset-all-button:active{
+    transform: translateY(-2px);
+    background-color: var(--light-green);
+    box-shadow: 5px 5px 5px var(--grey);
 }

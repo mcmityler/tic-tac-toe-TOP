@@ -237,7 +237,8 @@ const gameDisplay = (() => {
     const myResetAllButton = document.querySelector(".reset-all-button");
 
     
-    myResetAllButton.addEventListener("click", resetAll);
+    myResetAllButton.addEventListener("click", gameManager.resetGame);
+    myResetAllButton.addEventListener("click", openStartDialog);
     myRestartButton.addEventListener("click", gameManager.resetGame);
     myStartDialog.addEventListener("submit", startGameInput);
 
@@ -311,10 +312,6 @@ const gameDisplay = (() => {
         myTileButtons[x3][y3].classList.add("highlight-winner");
 
         console.log("Highlighted");
-    }
-    function resetAll(){
-        openStartDialog();
-        gameManager.resetGame();
     }
     openStartDialog();
     resetBoard();
