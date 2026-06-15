@@ -24,9 +24,6 @@ body{
     height: 100vh;
     background-color: var(--green);
 }
-header{
-    
-}
 main{
     height: 100%;
     display: grid;

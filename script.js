@@ -192,16 +192,6 @@ const gameManager = (()=>{
         isPlayer1Turn = (randomInt === 0); //if 0 player one goes first
         gameDisplay.updateTurnText();
         console.log(`it is ${isPlayer1Turn ? "Player 1" : "player 2"}'s turn to go first`);
-        //let first player select a square and fill with their symbol
-
-        //let next player select a square
-
-        //repeat taking turns until ...
-
-        //after 5 turns start checking win condition
-
-        //if someone wins add to their score
-        //exit the game loop and ask if they want to play again
     }
     function setWinner(_winner){
         gameWinner = _winner;
