@@ -14,6 +14,22 @@
 </head>
 <body>
     <header>
+        <div class="scoreboard">
+            <div class="p1-stats">
+                <div class="p1-bg">
+                    <i class="p1-pfp fa-solid fa-face-smile"></i>
+                </div>
+                <p class="p1-name">Player 1</p>
+                <p class="p1-score">0</p>
+            </div>
+            <div class="p2-stats">
+                <div class="p2-bg">
+                    <i class="p2-pfp fa-solid fa-face-smile"></i>
+                </div>
+                <p class="p2-name">Player 2</p>
+                <p class="p2-score">0</p>
+            </div>
+        </div>
         <p class="score-counter"></p>
         <p class="turn-display"></p>
         <button class="restart-button">Restart Game?</button>
@@ -22,7 +38,8 @@
         <div id="gameboard"></div>
         
     </main>
-    <dialog class="starting-dialog" open>
+    <!-- ADD OPEN BELOW -->
+    <dialog class="starting-dialog" > 
             <h1>Tic-Tac-Toe</h1>
             <form id="start-form">
                 <label for="player1-name">Player 1 name: </label>

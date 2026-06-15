@@ -18,7 +18,7 @@ body{
     background-color: var(--green);
 }
 header{
-
+    
 }
 main{
     height: 100%;
@@ -34,7 +34,7 @@ main{
     width: 657px;
     place-self: center;
     background-color: var(--light-green);
-    box-shadow: inset 5px -5px 15px gray;
+    box-shadow: inset 5px -5px 20px gray;
 }
 #gameboard button{
     display: grid;
@@ -78,4 +78,49 @@ main{
 .player-emoji-picker label:active i{
     color: gray; 
 
+}
+
+
+.scoreboard{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100%;
+    min-width: 500px;
+    max-width: 1000px;
+    place-self: center;
+}
+.p1-bg, .p2-bg{
+    width: 75px;
+    height: 75px;
+    border-radius: 100%;
+    display: grid;
+    place-items: center;
+    justify-self: flex-end;
+    align-self: center;
+    background-color: #3e2958;
+}
+.p1-stats, .p2-stats{
+    display: grid;
+    font-size: 1.8em;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    column-gap: 10px
+}
+.p1-name, .p2-name{
+    align-self: center;
+}
+.p1-bg i, .p2-bg i{
+    font-size: 3rem;
+    color: var(--yellow)
+}
+.p1-score, .p2-score{
+    grid-column: 1/-1;
+    justify-self: center;
+    align-self: flex-start;
+    font-size: 3rem;
+}
+.restart-button{
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }
