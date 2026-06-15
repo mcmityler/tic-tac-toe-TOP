@@ -74,7 +74,7 @@ main{
     place-items: center;
     justify-self: flex-end;
     align-self: center;
-    background-color: #3e2958;
+    background-color: var(--_background);
 }
 .p1-stats, .p2-stats{
     display: grid;
@@ -90,7 +90,7 @@ main{
 }
 .p1-bg i, .p2-bg i{
     font-size: 3rem;
-    color: var(--yellow)
+    color: var(--_icon)
     
 }
 .p1-score, .p2-score{
@@ -142,13 +142,13 @@ main{
 .player-emoji-picker .rating-radio{
     display: none;
 }
-.player-emoji-picker input[type='radio'] + label
+.player-emoji-picker input[type='radio'] + label, .p1-stats, .p2-stats
 {
     --_background: var(--background, grey);
     --_icon: var(--icon, white);
 }
 /* when sibling checked  */
-.player-emoji-picker input[type='radio']:checked + label{
+.player-emoji-picker input[type='radio']:checked + label, .p1-bg, .p2-bg{
     color: var(--_icon);
     background-color: var(--_background);
 }
@@ -163,23 +163,29 @@ main{
     color: white; 
 }
 
-#p1-e1 + label, #p2-e1 + label{
-     --icon: #E5E238;
+/* Custom color properties for Profile Icons  */
+#p1-e1 + label, #p2-e1 + label, 
+.p1-stats:has(.fa-face-smile), .p2-stats:has(.fa-face-smile){
+    --icon: #E5E238;
     --background: #383BE5;
 }
-#p1-e2 + label, #p2-e2 + label{
-     --icon: #1F26FF;
+#p1-e2 + label, #p2-e2 + label,
+.p1-stats:has(.fa-hat-wizard), .p2-stats:has(.fa-hat-wizard){
+    --icon: #1F26FF;
     --background: #FFF81F;
 }
-#p1-e3 + label, #p2-e3 + label{
-     --icon: #5994C5;
+#p1-e3 + label, #p2-e3 + label,
+.p1-stats:has(.fa-hippo), .p2-stats:has(.fa-hippo){
+    --icon: rgb(66, 65, 100);
     --background: #C58A59;
 }
-#p1-e4 + label, #p2-e4 + label{
-     --icon: #1DAF88;
+#p1-e4 + label, #p2-e4 + label,
+.p1-stats:has(.fa-crow), .p2-stats:has(.fa-crow){
+    --icon: #236e5a;
     --background: #AF1D43;
 }
-#p1-e5 + label, #p2-e5 + label{
-     --icon: #9c868a;
+#p1-e5 + label, #p2-e5 + label,
+.p1-stats:has(.fa-skull-crossbones), .p2-stats:has(.fa-skull-crossbones){
+    --icon: #9c868a;
     --background: #445552;
 }
