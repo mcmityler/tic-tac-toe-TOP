@@ -7,6 +7,7 @@ variables and functions in javascript
 
 Color Pallet: https://colorhunt.co/palette/fdf4afa5e9dd6fbeb234908b
 
+Font: https://fonts.google.com/specimen/Fjalla+One?preview.script=Latn
 
 Font Awesome Icons:
 Smiley Face: https://fontawesome.com/icons/classic/solid/face-smile 
